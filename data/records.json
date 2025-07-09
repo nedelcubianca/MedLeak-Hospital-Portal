@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "nume": "Andrew Peterson",
+    "nastere": "12.03.1990",
+    "cnp": "1900312234567",
+    "istoric": [
+      "2020: Type 2 Diabetes – treatment with Metformin",
+      "2021: Arterial Hypertension – treatment with Perindopril",
+      "2023: MRI scan – no lesions"
+    ],
+    "observatii": "The patient is following the prescribed treatment. Regular check-ups every 6 months are recommended."
+  },
+  {
+    "id": 2,
+    "nume": "Maria Johnson",
+    "nastere": "25.07.1985",
+    "cnp": "2850725230011",
+    "istoric": [
+      "2018: Bronchial Asthma – treated with Salbutamol",
+      "2020: Food Allergy – symptomatic treatment",
+      "2022: Surgical intervention – appendectomy"
+    ],
+    "observatii": "General condition is good. Avoiding asthma triggers is recommended."
+  },
+  {
+    "id": 3,
+    "nume": "Vlad Georgescu",
+    "nastere": "03.11.1995",
+    "cnp": "1951103123456",
+    "istoric": [
+      "2019: Humerus fracture – immobilization and full recovery",
+      "2021: Hepatitis A – fully treated, no complications",
+      "2024: Cardiology check-up – normal sinus rhythm"
+    ],
+    "observatii": "No active chronic issues. An active lifestyle and annual medical tests are recommended."
+  }
+]

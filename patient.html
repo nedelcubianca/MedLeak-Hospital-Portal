@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Patient File</title>
+  <link rel="stylesheet" href="styles/patient.css">
+</head>
+<body>
+  <h1> Patient Medical Record</h1>
+
+  <div id="content">
+    <p>Loading patient data...</p>
+  </div>
+
+  <hr>
+  <nav>
+    <a href="index.html"> Back to homepage</a>
+  </nav>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const id = parseInt(params.get("id"));
+
+    fetch("data/records.json")
+      .then(res => res.json())
+      .then(records => {
+        const pacient = records.find(p => p.id === id);
+
+        if (!pacient) {
+          document.getElementById("content").innerHTML = "<p style='color: red;'>Patient not found.</p>";
+          return;
+        }
+
+        const html = `
+          <p><strong>Name:</strong> ${pacient.nume}</p>
+          <p><strong>Date of Birth:</strong> ${pacient.nastere}</p>
+          <p><strong>National ID Number (CNP):</strong> ${pacient.cnp}</p>
+
+          <h2> Medical History</h2>
+          <ul>${pacient.istoric.map(e => `<li>${e}</li>`).join('')}</ul>
+
+          <h2> Doctor's Observations</h2>
+          <p>${pacient.observatii}</p>
+        `;
+
+        document.getElementById("content").innerHTML = html;
+      })
+      .catch(err => {
+        document.getElementById("content").innerHTML = "<p style='color: red;'>Error loading data.</p>";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>

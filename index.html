@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MedLeak Hospital</title>
+  <link rel="stylesheet" href="styles/index.css">
+</head>
+<body>
+  <h1> MedLeak Hospital</h1>
+
+  <p> <b>Welcome to the Official Platform of MedLeak Hospital! </b>
+
+    At MedLeak Hospital, we are committed to providing high-quality medical care to each and every one of our patients. Our team of dedicated healthcare professionals is here to ensure your well-being, comfort, and safety at every step of your medical journey.
+    
+    Patient confidentiality is one of our highest priorities. We strictly adhere to all privacy regulations and maintain secure systems to protect your personal health information. You can trust that your medical records and personal data are treated with the utmost discretion and care.
+    
+    Whether you're here for a consultation, treatment, or simply seeking more information, we are honored to support you with professionalism, compassion, and respect.</p>
+
+  <img src="images/hospital.png" alt="Spital" width="500">
+
+  <nav>
+    <a href="login.html"> Login</a> 
+    <a href="reviews.html"> Reviews</a>
+  </nav>
+
+  <hr>
+
+  <p>Leave a Review About Our Hospital
+
+    Your feedback matters to us!
+    If you have been a patient at MedLeak Hospital or have had any interaction with our medical staff, we would love to hear about your experience. Your reviews help us improve our services and continue to provide compassionate, high-quality care.
+    
+    Please take a moment to share your thoughts—whether it's about the quality of care, our facilities, or the professionalism of our team. Every comment helps us grow and better serve our community.
+    
+    Thank you for helping us improve!</p>
+  <form id="reviewForm">
+    <input type="text" id="username" placeholder="Your name ..." required>
+    <br><br>
+    <textarea id="comment" placeholder="Write your comment here ..." rows="4" cols="50" required></textarea>
+    <br><br>
+    <button type="submit">Send the review</button>
+  </form>
+
+  <h3>Comments from other patients:</h3>
+  <div id="commentsSection"></div>
+
+  <script>
+    
+    const form = document.getElementById('reviewForm');
+    const section = document.getElementById('commentsSection');
+
+   
+    function loadComments() {
+      const comments = JSON.parse(localStorage.getItem('reviews') || '[]');
+      section.innerHTML = '';
+      comments.forEach(c => {
+        section.innerHTML += `<p><strong>${c.user}</strong>: ${c.text}</p>`;
+      });
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const user = document.getElementById('username').value;
+      const text = document.getElementById('comment').value;
+
+      const newComment = { user, text };
+      const comments = JSON.parse(localStorage.getItem('reviews') || '[]');
+      comments.push(newComment);
+      localStorage.setItem('reviews', JSON.stringify(comments));
+
+      loadComments();
+      form.reset();
+    });
+
+    loadComments();
+  </script>
+</body>
+</html>

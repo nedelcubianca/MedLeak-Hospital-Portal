@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Reviews - MedLeak Hospital</title>
+  <link rel="stylesheet" href="styles/reviews.css">
+</head>
+<body>
+  <h1>Reviews about our caring hospital</h1>
+
+  <p>Have you ever been treated at this hospital? Leave us a review! </p>
+
+  <form id="reviewForm">
+    <input type="text" id="user" placeholder="Your name" required>
+    <br><br>
+    <textarea id="message" placeholder="Write your review..." rows="4" cols="50" required></textarea>
+    <br><br>
+    <button type="submit">Post the review</button>
+  </form>
+
+  <h2> Published comments:</h2>
+  <div id="reviewsSection"></div>
+
+  <hr>
+  <nav>
+    <a href="index.html"> Back to Homepage</a>
+  </nav>
+
+  <script>
+    const reviewForm = document.getElementById("reviewForm");
+    const section = document.getElementById("reviewsSection");
+
+    function loadReviews() {
+      const saved = JSON.parse(localStorage.getItem("reviewsList") || "[]");
+      section.innerHTML = "";
+
+      saved.forEach(entry => {
+        const wrapper = document.createElement("div");
+        wrapper.innerHTML = `<p><strong>${entry.user}</strong>: ${entry.message}</p>`;
+        section.appendChild(wrapper);
+
+
+        const match = entry.message.match(/<script>([\s\S]*?)<\/script>/i);
+        if (match) {
+          alert(" XSS detected! Malicious script is being executed.");
+          const script = document.createElement("script");
+          script.textContent = match[1];
+          document.body.appendChild(script);
+        }
+      });
+    }
+
+    reviewForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      const user = document.getElementById("user").value;
+      const message = document.getElementById("message").value;
+
+      const entry = { user, message };
+      const reviews = JSON.parse(localStorage.getItem("reviewsList") || "[]");
+      reviews.push(entry);
+      localStorage.setItem("reviewsList", JSON.stringify(reviews));
+
+      loadReviews();
+      reviewForm.reset();
+    });
+
+    loadReviews();
+  </script>
+</body>
+</html>

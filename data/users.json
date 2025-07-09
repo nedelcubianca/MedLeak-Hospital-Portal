@@ -1,0 +1,27 @@
+[
+    {
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "redirect": "admin.html"
+    },
+    {
+      "username": "user1",
+      "password": "pass1",
+      "role": "pacient",
+      "redirect": "patient.html?id=1"
+    },
+    {
+      "username": "user2",
+      "password": "pass2",
+      "role": "pacient",
+      "redirect": "patient.html?id=2"
+    },
+    {
+      "username": "user3",
+      "password": "pass3",
+      "role": "pacient",
+      "redirect": "patient.html?id=3"
+    }
+  ]
+  
